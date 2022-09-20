@@ -1,8 +1,10 @@
 import argparse
+from unhingify.rules.drop_letter import DropLetterRule
 
 from unhingify.rules.random_capitalization import RandomCapitalizationRule
 from unhingify.rules.space_around_punctuation import SpaceAroundPunctuationRule
 from unhingify.rules.to_lower import ToLowerRule
+from unhingify.rules.typos import TyposRule
 from unhingify.transformer import Transformer
 
 
@@ -17,7 +19,9 @@ def main():
     text = args.input.read().strip()
 
     tx = Transformer()
-    tx.add_rule(ToLowerRule(), 0)
+    tx.add_rule(TyposRule(), 0)  # Relies on correct capitalization.
+    tx.add_rule(ToLowerRule(), 1)
+    tx.add_rule(DropLetterRule(), 1)
     tx.add_rule(RandomCapitalizationRule(), 10)
     tx.add_rule(SpaceAroundPunctuationRule(), 10)
 
