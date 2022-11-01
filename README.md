@@ -1,4 +1,4 @@
-# Unhingify
+# TextMalformer 
 
 _Make text look crazy._
 
